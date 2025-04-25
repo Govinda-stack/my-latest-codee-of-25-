@@ -648,3 +648,11 @@ main.aboutpage {
 button{
   text-transform: capitalize !important;
 }
+
+p.mb-4.btn-loc.card-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  line-height: 2;
+}
