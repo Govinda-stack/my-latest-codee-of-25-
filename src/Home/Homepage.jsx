@@ -47,51 +47,51 @@ import linkdin from '../assets/Imgs/Linkdin.svg'
 import { Link } from "react-router-dom";
 import axios from 'axios';
 // import axios from 'axios';
-const projects = [
-  {
-    id: 1,
-    title: "GODREJ VRIKSHYA",
-    price: "₹ 3.30 CR* ONWARDS",
-    location: "SECTOR 49, GURGAON",
-    size: "3 & 4 BHK",
-    feet: "1948 - 3700 Sq.Ft.",
-    image: f1, // Replace with actual image URL
-    bottomImage: BottomImg1,
-  },
-  {
-    id: 2,
-    title: "SMARTWORLD THE EDITION",
-    price: "₹ 6.50 CR* ONWARDS",
-    location: "SECTOR 66, GURGAON",
-    size: "3 & 4 BHK",
-    feet: "1948 - 3700 Sq.Ft.",
+// const projects = [
+//   {
+//     id: 1,
+//     title: "GODREJ VRIKSHYA",
+//     price: "₹ 3.30 CR* ONWARDS",
+//     location: "SECTOR 49, GURGAON",
+//     size: "3 & 4 BHK",
+//     feet: "1948 - 3700 Sq.Ft.",
+//     image: f1, // Replace with actual image URL
+//     bottomImage: BottomImg1,
+//   },
+//   {
+//     id: 2,
+//     title: "SMARTWORLD THE EDITION",
+//     price: "₹ 6.50 CR* ONWARDS",
+//     location: "SECTOR 66, GURGAON",
+//     size: "3 & 4 BHK",
+//     feet: "1948 - 3700 Sq.Ft.",
 
-    image: f2,
-    bottomImage: BottomImg2,
-  },
-  {
-    id: 3,
-    title: "GODREJ ARISTOCRAT",
-    price: "₹ 5.53 CR* ONWARDS",
-    location: "SECTOR 62, GURGAON",
-    feet: "1948 - 3700 Sq.Ft.",
+//     image: f2,
+//     bottomImage: BottomImg2,
+//   },
+//   {
+//     id: 3,
+//     title: "GODREJ ARISTOCRAT",
+//     price: "₹ 5.53 CR* ONWARDS",
+//     location: "SECTOR 62, GURGAON",
+//     feet: "1948 - 3700 Sq.Ft.",
 
-    size: "3 & 4 BHK",
-    image: f3,
-    bottomImage: BottomImg3,
-  },
-  {
-    id: 4,
-    title: "GODREJ ARISTOCRAT",
-    price: "₹ 5.53 CR* ONWARDS",
-    location: "SECTOR 62, GURGAON",
-    feet: "1948 - 3700 Sq.Ft.",
+//     size: "3 & 4 BHK",
+//     image: f3,
+//     bottomImage: BottomImg3,
+//   },
+//   {
+//     id: 4,
+//     title: "GODREJ ARISTOCRAT",
+//     price: "₹ 5.53 CR* ONWARDS",
+//     location: "SECTOR 62, GURGAON",
+//     feet: "1948 - 3700 Sq.Ft.",
 
-    size: "3 & 4 BHK",
-    image: f3,
-    bottomImage: BottomImg4,
-  },
-];
+//     size: "3 & 4 BHK",
+//     image: f3,
+//     bottomImage: BottomImg4,
+//   },
+// ];
 
 const testimonials = [
   {
@@ -328,9 +328,9 @@ useEffect(() => {
         logoTo1: { opacity: 1, y: 45, x: 200, scale: 0.58, duration: 1 },
         scrollImageTo: { opacity: 0, duration: 0.2 },
         pathsTo: { fill: '#c1d1e0', stroke: '#c1d1e0', duration: 0.6 },
-        logoTo2: { y: 405, x: 306, scale: 0.1, duration: 5.6 },
+        logoTo2: { y: 330, x: 306, scale: 0.1, duration: 5.6 },
         logoTo3: { opacity: 0, duration: 0.5 },
-        scrollTrigger: { start: 'top 65%', end: 'bottom 63%', scrub: 0.5 },
+        scrollTrigger: { start: 'top 65%', end: 'bottom 49%', scrub: 0.5 },
       };
     }  
     else if (width <= 1400) {
@@ -339,9 +339,9 @@ useEffect(() => {
         logoTo1: { opacity: 1, y: 48, x: 250, scale: 0.6, duration: 1 },
         scrollImageTo: { opacity: 0, duration: 0.2 },
         pathsTo: { fill: '#c1d1e0', stroke: '#c1d1e0', duration: 0.6 },
-        logoTo2: { y: 445, x: 470, scale: 0.1, duration: 2.6 },
+        logoTo2: { y: 415, x: 470, scale: 0.1, duration: 2.6 },
         logoTo3: { opacity: 0, duration: 0.5 },
-        scrollTrigger: { start: 'top 60%', end: 'bottom 59%', scrub: 1 },
+        scrollTrigger: { start: 'top 60%', end: 'bottom 40%', scrub: 1 },
       };
     } else if (width <= 1600) {
       props = {
@@ -349,10 +349,10 @@ useEffect(() => {
         logoTo1: { opacity: 1, y: 50, x: 280, scale: 0.6, duration: 1 , scrub: 1},
         scrollImageTo: { opacity: 0, duration: 1.1, scrub: 1 },
         pathsTo: { fill: '#c1d1e0', stroke: '#c1d1e0', scrub: 3 },
-        logoTo2: { y: 510, x: 551, scale: 0.1, duration: 4.6  },
+        logoTo2: { y: 480, x: 561, scale: 0.1, duration: 4.6  },
         logoTo3: { opacity: 0, duration: 0.5 },
         scrollTrigger: { start: 'top 75%', 
-          end: 'bottom 55%',
+          end: 'bottom 52%',
         ease: 'power3.out', scrub: 2.3 },
       };
     }  else if (width <= 1750) {
@@ -361,10 +361,10 @@ useEffect(() => {
         logoTo1: { opacity: 1, y: 50, x: 280, scale: 0.6, duration: 1 , scrub: 1},
         scrollImageTo: { opacity: 0, duration: 1.1, scrub: 1 },
         pathsTo: { fill: '#c1d1e0', stroke: '#c1d1e0', scrub: 3 },
-        logoTo2: { y: 509, x: 597, scale: 0.1, duration: 4.6  },
+        logoTo2: { y: 479, x: 625, scale: 0.1, duration: 4.6  },
         logoTo3: { opacity: 0, duration: 0.5 },
         scrollTrigger: { start: 'top 75%', 
-          end: 'bottom 55%',
+          end: 'bottom 50%',
         ease: 'power3.out', scrub: 2.3 },
       };
     } 
@@ -374,10 +374,10 @@ useEffect(() => {
         logoTo1: { opacity: 1, y: 50, x: 280, scale: 0.6, duration: 1 , scrub: 1},
         scrollImageTo: { opacity: 0, duration: 1.1, scrub: 1 },
         pathsTo: { fill: '#c1d1e0', stroke: '#c1d1e0', scrub: 3 },
-        logoTo2: { y: 509, x: 650, scale: 0.1, duration: 4.6  },
+        logoTo2: { y: 483, x: 650, scale: 0.1, duration: 4.6  },
         logoTo3: { opacity: 0, duration: 0.5 },
         scrollTrigger: { start: 'top 75%', 
-          end: 'bottom 55%',
+          end: 'bottom 48%',
         ease: 'power3.out', scrub: 2.3 },
       };
     }else if (width <= 1920) {
@@ -386,9 +386,9 @@ useEffect(() => {
         logoTo1: { opacity: 1, y: 50, x: 300, scale: 0.6, duration: 1 },
         scrollImageTo: { opacity: 0, duration: 0.2 },
         pathsTo: { fill: '#c1d1e0', stroke: '#c1d1e0', duration: 0.6 },
-        logoTo2: { y: 523, x: 725, scale: 0.1, duration: 3.2 },
+        logoTo2: { y: 500, x: 725, scale: 0.1, duration: 3.2 },
         logoTo3: { opacity: 0, duration: 0.5 },
-        scrollTrigger: { start: 'top center', end: 'bottom 55%', scrub: 0.5 },
+        scrollTrigger: { start: 'top center', end: 'bottom 43%', scrub: 0.5 },
       };
     }
 
@@ -899,8 +899,8 @@ useEffect(() => {
             from: { opacity: 0, y: -390, x: 1170 ,scale: 1.3, scrub: 1},
             to: { opacity: 1, y: 50, x: 660,scale: 0.7, ease: 'power3.out', duration: 6.5, scrub: 1 },
           },
-          to: { opacity: 0, y: 610, x: 589, scale: 0, ease: 'power3.inOut', duration: 5.9 , scrub: ``},
-          scrollTrigger: { start: 'top -15%', end: 'bottom 5%', duration: 3.5,scrub: 2.6 },
+          to: { opacity: 0, y: 610, x: 589, scale: 0, ease: 'power3.inOut', duration: 11.9 , scrub: ``},
+          scrollTrigger: { start: 'top -20%', end: 'bottom -1%', duration: 3.5,scrub: 5.6 },
         };
       } 
       else if (width <= 1700) {
@@ -1348,9 +1348,9 @@ useEffect(() => {
         ease: "power2.out",
         scrollTrigger: {
           trigger: blogsectionRef.current,
-          start: "top center-=550",
+          start: "top center-=525",
           end: "bottom center",
-          scrub: 1, // Increased scrub for smoother animation
+          scrub: 2, // Increased scrub for smoother animation
           onUpdate: (self) => {
             const imgRect = img.getBoundingClientRect();
             const boxRect = box.getBoundingClientRect();
