@@ -53,9 +53,8 @@ export default function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
           <Route path="/disclaimer" element={<Disc />} />
-          <Route path="/project" element={<Project />} />
+          <Route path="/project/:slug" element={<Project />} />
           <Route path="/search-Listing" element={<Search />} />
-
         </Route>
       </Routes>
 

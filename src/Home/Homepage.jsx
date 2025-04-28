@@ -207,10 +207,16 @@ function Home() {
 //   //       // setLoading(false); // Uncomment if you have a loading state
 //   //     });
 //   // }, []);
-
   const [projects, setProjects] = useState([]);
 const [apiProjectsCount, setApiProjectsCount] = useState(0);
-
+const generateSlug = (name) => {
+  return name
+    ? name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-') // Replace non-alphanumeric characters with hyphens
+        .replace(/(^-|-$)/g, '') // Remove leading/trailing hyphens
+    : 'untitled-project'; // Fallback slug
+};
 useEffect(() => {
   const baseUrl = import.meta.env.VITE_BASE_URL || 'https://default-api-url.com/';
   const apiUrl = `${baseUrl}api/projects`;
@@ -251,6 +257,7 @@ useEffect(() => {
         const mappedApiProjects = apiProjects.map((project, index) => ({
           id: project.id,
           title: project.name || 'Untitled Project',
+          slug: generateSlug(project.name), // Generate slug from name
           price: project.tag_price ? `₹ ${project.tag_price} CR* ONWARDS` : 'Price on Request',
           location: project.address || 'Unknown Location',
           size: project.specification || '3 & 4 BHK',
@@ -260,7 +267,8 @@ useEffect(() => {
         }));
 
         // Combine API projects with static projects
-        const combinedProjects = [...mappedApiProjects, ...staticProjects];
+        // const combinedProjects = [...mappedApiProjects, ...staticProjects];
+        const combinedProjects = [...mappedApiProjects];
         setProjects(combinedProjects);
       }
     })
@@ -1724,8 +1732,8 @@ bottomImages.forEach((img) => {
                     <Card.Text className="text-primary font-weight-bold">
                       {project.price}
                     </Card.Text>
-                    <Button className="Up-arrow-btn">
-                      <img src={Arrow} />
+                    <Button as={Link} to={`/project/${project.slug}`} className="Up-arrow-btn">
+                    <img src={Arrow} />
                     </Button>
                   </Card.Body>
 

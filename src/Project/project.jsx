@@ -53,10 +53,11 @@ import NextArrow from "../assets/Imgs/right.svg";
 import PrevArrow from "../assets/Imgs/left.svg";
 import { Accordion } from "react-bootstrap";
 import Char from "./Chart";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Instagram from "../assets/Imgs/ig.svg";
 import Facebook from "../assets/Imgs/facbook.svg";
 import linkdin from "../assets/Imgs/Linkdin.svg";
+import axios from "axios";
 
 function project() {
   const [formData, setFormData] = useState({
@@ -285,6 +286,107 @@ function project() {
       console.log("Form has errors, not submitting");
     }
   };
+  const { slug } = useParams();
+  const [project, setProject] = useState(null);
+  console.log("Immediately after useState: ", project);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const generateSlug = (name) => {
+    console.log('generateSlug: Input name:', name);
+    const result = name
+      ? name
+          .trim()
+          .toLowerCase()
+          .normalize('NFKD') // Normalize Unicode characters
+          .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '')
+      : 'untitled-project';
+    console.log('generateSlug: Output slug:', result);
+    return result;
+  };
+  
+  useEffect(() => {
+    console.log('useEffect: Starting with slug:', slug);
+    
+    const baseUrl = import.meta.env.VITE_BASE_URL || 'https://default-api-url.com/';
+    console.log('useEffect: Base URL:', baseUrl);
+    
+    const apiUrl = `${baseUrl}api/projects`;
+    console.log('useEffect: API URL:', apiUrl);
+  
+    console.log('useEffect: Initiating axios GET request');
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        console.log('useEffect: Axios response received:', response);
+        console.log('useEffect: Response data:', response.data);
+        
+        if (response.data.success) {
+          console.log('useEffect: API request successful');
+          console.log('useEffect: Searching for project with slug:', slug);
+          
+          const projectData = response.data.data.find((p) => {
+            const projectSlug = generateSlug(p.name);
+            console.log(
+              'useEffect: Comparing project slug:',
+              projectSlug,
+              'with target slug:',
+              slug
+            );
+            return projectSlug === slug;
+          });
+          
+          console.log('useEffect: Found project data:', projectData);
+          console.log('useEffect: All projects data:', response.data.data);
+  
+          if (projectData) {
+            console.log('useEffect: Project found, setting project state');
+            const projectState = {
+              id: projectData.id,
+              project_id: projectData.project_id,
+              title: projectData.name || 'Untitled Project',
+              slug: generateSlug(projectData.name),
+              price: projectData.tag_price
+                ? `₹ ${projectData.tag_price} CR* ONWARDS`
+                : 'Price on Request',
+              location: projectData.address || 'Unknown Location',
+              size: projectData.specification || '3 & 4 BHK',
+              feet: '1948 - 3700 Sq.Ft.',
+              image: projectData.hero_img || 'https://via.placeholder.com/300',
+              overview: projectData.overview_content || 'No overview available.',
+              amenities: projectData.amenities || [],
+              properties: projectData.property_types || [
+                { type: 'N/A', size: 'Contact for details' },
+              ],
+            };
+            
+            console.log('useEffect: Setting project state with:', projectState);
+            setProject(projectState);
+          } else {
+            console.log('useEffect: Project not found in data');
+            setError('Project not found');
+          }
+        } else {
+          console.log('useEffect: API request unsuccessful');
+          setError('Project not found');
+        }
+      })
+      .catch((err) => {
+        console.error('useEffect: Error fetching project:', err);
+        console.error('useEffect: Error details:', {
+          message: err.message,
+          response: err.response,
+          request: err.request,
+        });
+        setError('Failed to load project details');
+      })
+      .finally(() => {
+        console.log('useEffect: Request completed, setting loading to false');
+        setLoading(false);
+      });
+  }, [slug]);
   return (
     <>
       <main className="project-page">
@@ -321,10 +423,12 @@ function project() {
                 data-aos-easing="ease-in-sine"
                 data-aos-offset="300"
               >
-                <h1>GODREJ VRIKSHYA</h1>
+                {/* <h1>GODREJ VRIKSHYA</h1> */}
+                <h1>{project?.title}</h1>
                 <p className="loction">
                   <img src={location} style={{ marginRight: "10px" }} />{" "}
-                  SECTOR-103, GURUGRAM
+                  {/* SECTOR-103, GURUGRAM */}
+                  {project?.location}
                 </p>
               </Col>
               <Col></Col>
@@ -431,7 +535,7 @@ function project() {
                   data-aos-easing="ease-in-sine"
                   data-aos-offset="300"
                 >
-                  Godrej Vrikshya – Inspired by Trees, is a luxury residential
+                  {/* Godrej Vrikshya – Inspired by Trees, is a luxury residential
                   project situated in Sector-103, Gurugram, along the Dwarka
                   Expressway. Spanning approximately 15 acres, the development
                   comprises six towers, each rising up to 30 floors, offering a
@@ -439,7 +543,8 @@ function project() {
                   Resort-Style Central Greens, a grand Club-House, an
                   olympic-length infinity edge swimming pool, zen garden, yoga
                   deck, multipurpose court, spa and salon. This project ensures
-                  seamless connectivity to Delhi and other parts of Gurgaon.
+                  seamless connectivity to Delhi and other parts of Gurgaon. */}
+                  {project?.overview}
                 </p>
                 <button
                   type="text"
@@ -475,14 +580,16 @@ function project() {
                   <Card>
                     <img src={over3} />
 
-                    <p>3 & 4 BHK Apartments</p>
+                    {/* <p>3 & 4 BHK Apartments</p> */}
+                    {project?.size}
                   </Card>
                 </Col>
                 <Col md={6} lg={6} className="left-brdr res">
                   <Card className="">
                     <img src={over4} />
 
-                    <p>3.30 Crore* onwards</p>
+                    {/* <p>3.30 Crore* onwards</p> */}
+                    {project?.price}  
                   </Card>
                 </Col>
               </Col>
